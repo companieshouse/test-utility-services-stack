@@ -70,3 +70,15 @@ variable "enable_container_insights" {
   description = "A boolean value indicating whether to enable Container Insights or not"
   default     = true
 }
+
+variable "create_route53_aliases" {
+  default     = false
+  description = "Whether to create Route53 aliases pointing to the ALB"
+  type        = bool
+}
+
+variable "enable_test_data_generator_alb" {
+  default     = true
+  description = "Defines whether an ALB for the test-data-generator should be created (true) or not (false)"
+  type        = bool
+}
