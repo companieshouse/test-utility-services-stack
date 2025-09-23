@@ -82,6 +82,11 @@ variable "domain_name" {
   type        = string
 }
 
+variable "cert_domain" {
+  description = "The certificate domain to use."
+  type        = string
+}
+
 variable "enable_test_data_generator_alb" {
   default     = true
   description = "Defines whether an ALB for the test-data-generator should be created (true) or not (false)"

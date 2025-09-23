@@ -23,3 +23,7 @@ data "aws_vpc" "vpc" {
     values = [local.vpc_name]
   }
 }
+
+data "aws_acm_certificate" "cert" {
+  domain = var.cert_domain
+}
