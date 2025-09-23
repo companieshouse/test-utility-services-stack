@@ -53,8 +53,6 @@ module "test-data-alb" {
   idle_timeout            = 1200
   create_security_group   = true
   internal                = true
-  ingress_cidrs           = local.ingress_cidrs_private
-  ingress_prefix_list_ids = local.ingress_prefix_list_ids
   redirect_http_to_https  = true
   route53_domain_name     = var.domain_name
   route53_aliases         = var.route53_aliases_test_data
