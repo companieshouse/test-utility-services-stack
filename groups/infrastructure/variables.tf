@@ -77,6 +77,12 @@ variable "create_route53_aliases" {
   type        = bool
 }
 
+variable "route53_aliases_test_data" {
+  type        = list(string)
+  description = "The Route53 aliases to create for test-data lb ."
+  default     = []
+}
+
 variable "domain_name" {
   description = "Domain name"
   type        = string
@@ -85,10 +91,4 @@ variable "domain_name" {
 variable "cert_domain" {
   description = "The certificate domain to use."
   type        = string
-}
-
-variable "enable_test_data_alb" {
-  default     = true
-  description = "Defines whether an ALB for the test-data-generator should be created (true) or not (false)"
-  type        = bool
 }
