@@ -77,6 +77,11 @@ variable "create_route53_aliases" {
   type        = bool
 }
 
+variable "domain_name" {
+  description = "Domain name"
+  type        = string
+}
+
 variable "enable_test_data_generator_alb" {
   default     = true
   description = "Defines whether an ALB for the test-data-generator should be created (true) or not (false)"
