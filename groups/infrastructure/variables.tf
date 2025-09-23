@@ -87,7 +87,7 @@ variable "cert_domain" {
   type        = string
 }
 
-variable "enable_test_data_generator_alb" {
+variable "enable_test_data_alb" {
   default     = true
   description = "Defines whether an ALB for the test-data-generator should be created (true) or not (false)"
   type        = bool

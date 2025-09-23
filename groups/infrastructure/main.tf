@@ -42,11 +42,11 @@ module "ecs-cluster" {
   notify_topic_slack_endpoint = local.notify_topic_slack_endpoint
 }
 
-module "test-data-generator-alb" {
+module "test-data-alb" {
   source = "git@github.com:companieshouse/terraform-modules//aws/application_load_balancer?ref=1.0.345"
 
   environment             = var.environment
-  service                 = "test-data-generator"
+  service                 = "test-data"
   ssl_certificate_arn     = data.aws_acm_certificate.cert.arn
   subnet_ids              = split(",", local.subnet_ids_private)
   vpc_id                  = data.aws_vpc.vpc.id
@@ -57,7 +57,7 @@ module "test-data-generator-alb" {
   ingress_prefix_list_ids = local.ingress_prefix_list_ids
   redirect_http_to_https  = true
   route53_domain_name     = var.domain_name
-  route53_aliases         = var.route53_aliases_test_data_generator
+  route53_aliases         = var.route53_aliases_test_data
   create_route53_aliases  = var.create_route53_aliases
   service_configuration = {
     listener_config = {
