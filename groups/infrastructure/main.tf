@@ -55,7 +55,7 @@ module "test-utility-alb" {
   internal                = true
   redirect_http_to_https  = true
   route53_domain_name     = var.domain_name
-  route53_aliases         = var.route53_aliases_test_data
+  route53_aliases         = var.route53_aliases_test_utility
   create_route53_aliases  = var.create_route53_aliases
   service_configuration = {
     listener_config = {
