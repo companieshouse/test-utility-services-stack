@@ -42,11 +42,11 @@ module "ecs-cluster" {
   notify_topic_slack_endpoint = local.notify_topic_slack_endpoint
 }
 
-module "test-data-alb" {
+module "test-utility-alb" {
   source = "git@github.com:companieshouse/terraform-modules//aws/application_load_balancer?ref=1.0.345"
 
   environment             = var.environment
-  service                 = "test-data"
+  service                 = "test-utility"
   ssl_certificate_arn     = data.aws_acm_certificate.cert.arn
   subnet_ids              = split(",", local.subnet_ids_private)
   vpc_id                  = data.aws_vpc.vpc.id
