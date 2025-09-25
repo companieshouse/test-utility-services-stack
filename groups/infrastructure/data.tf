@@ -27,3 +27,14 @@ data "aws_vpc" "vpc" {
 data "aws_acm_certificate" "cert" {
   domain = var.cert_domain
 }
+
+data "aws_subnets" "private" {
+  filter {
+    name   = "tag:Name"
+    values = [local.application_subnet_pattern]
+  }
+  filter {
+    name   = "tag:NetworkType"
+    values = ["private"]
+  }
+}
