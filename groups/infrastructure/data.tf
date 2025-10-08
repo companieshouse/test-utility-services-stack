@@ -17,6 +17,11 @@ data "aws_subnets" "application" {
   }
 }
 
+data "aws_subnet" "application" {
+  for_each = toset(data.aws_subnets.application.ids)
+  id       = each.value
+}
+
 data "aws_vpc" "vpc" {
   filter {
     name   = "tag:Name"
@@ -28,13 +33,10 @@ data "aws_acm_certificate" "cert" {
   domain = var.cert_domain
 }
 
-data "aws_subnets" "private" {
-  filter {
-    name   = "tag:Name"
-    values = [local.application_subnet_pattern]
-  }
-  filter {
-    name   = "tag:NetworkType"
-    values = ["private"]
-  }
+data "aws_ec2_managed_prefix_list" "admin" {
+  name = "administration-cidr-ranges"
+}
+
+data "aws_ec2_managed_prefix_list" "shared_services_management" {
+  name = "shared-services-management-cidrs"
 }
