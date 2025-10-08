@@ -66,12 +66,3 @@ module "test-utility-alb" {
     }
   }
 }
-
-module "secrets" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/ecs/secrets?ref=1.0.231"
-
-  name_prefix = local.name_prefix
-  environment = var.environment
-  kms_key_id  = data.aws_kms_key.stack_configs.id
-  secrets     = local.parameter_store_secrets
-}
