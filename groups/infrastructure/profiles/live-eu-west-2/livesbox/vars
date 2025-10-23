@@ -2,3 +2,4 @@ environment = "livesbox"
 aws_profile = "live-eu-west-2"
 
 ec2_key_pair_name = "ch-aws-live"
+cert_domain = "*.company-information.service.gov.uk"
