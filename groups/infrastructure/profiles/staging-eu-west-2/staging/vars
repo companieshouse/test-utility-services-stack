@@ -1,4 +1,4 @@
-environment = "stagsbox"
+environment = "staging"
 aws_profile = "staging-eu-west-2"
 
 ec2_key_pair_name = "ch-aws-staging"
