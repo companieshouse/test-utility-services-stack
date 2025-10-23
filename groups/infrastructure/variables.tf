@@ -86,6 +86,7 @@ variable "route53_aliases_test_utility" {
 variable "domain_name" {
   description = "Domain name"
   type        = string
+  default     = ""
 }
 
 variable "cert_domain" {
