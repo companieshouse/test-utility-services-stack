@@ -71,6 +71,12 @@ variable "enable_container_insights" {
   default     = true
 }
 
+variable "create_internal_alb" {
+  type        = bool
+  description = "Override with value false if this ELB is required as internet facing in the environment"
+  default     = true
+}
+
 variable "create_route53_aliases" {
   default     = false
   description = "Whether to create Route53 aliases pointing to the ALB"

@@ -54,7 +54,7 @@ module "test-utility-alb" {
   create_security_group   = true
   ingress_cidrs           = local.application_cidrs
   ingress_prefix_list_ids = local.ingress_prefix_list_ids
-  internal                = true
+  internal                = var.create_internal_alb
   redirect_http_to_https  = true
   route53_domain_name     = var.domain_name
   route53_aliases         = var.route53_aliases_test_utility
