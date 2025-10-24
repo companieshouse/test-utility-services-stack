@@ -3,3 +3,4 @@ aws_profile = "staging-eu-west-2"
 
 ec2_key_pair_name = "ch-aws-staging"
 cert_domain = "*.companieshouse.gov.uk"
+create_internal_alb = true
