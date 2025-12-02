@@ -48,7 +48,7 @@ module "test-utility-alb" {
   environment             = var.environment
   service                 = "test-utility"
   ssl_certificate_arn     = data.aws_acm_certificate.cert.arn
-  subnet_ids              = split(",", local.application_subnet_ids)
+  subnet_ids              = local.lb_subnet_ids
   vpc_id                  = data.aws_vpc.vpc.id
   idle_timeout            = 1200
   create_security_group   = true
