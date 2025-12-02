@@ -25,22 +25,6 @@ data "aws_vpc" "vpc" {
   }
 }
 
-data "aws_subnets" "management" {
-  filter {
-    name   = "tag:Name"
-    values = [local.application_subnet_pattern]
-  }
-  filter {
-    name   = "tag:Service"
-    values = ["management"]
-  }
-}
-
-data "aws_subnet" "management" {
-  for_each = toset(data.aws_subnets.management.ids)
-  id       = each.value
-}
-
 data "aws_acm_certificate" "cert" {
   domain = var.cert_domain
 }
