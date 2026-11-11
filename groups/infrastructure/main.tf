@@ -3,11 +3,11 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = ">= 4.54.0, < 5.0"
+      version = ">= 6.0, < 7.0"
     }
     vault = {
       source  = "hashicorp/vault"
-      version = ">= 3.18.0, < 4.0"
+      version = ">= 5.0, < 6.0"
     }
   }
 }
@@ -21,29 +21,32 @@ terraform {
 }
 
 module "ecs-cluster" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/ecs/ecs-cluster?ref=1.0.231"
+  source = "git@github.com:companieshouse/terraform-modules//aws/ecs/ecs-cluster?ref=1.0.449"
 
-  stack_name                  = local.stack_name
-  name_prefix                 = local.name_prefix
-  environment                 = var.environment
-  aws_profile                 = var.aws_profile
-  vpc_id                      = data.aws_vpc.vpc.id
-  subnet_ids                  = local.application_subnet_ids
-  ec2_key_pair_name           = var.ec2_key_pair_name
-  ec2_instance_type           = var.ec2_instance_type
-  ec2_image_id                = var.ec2_image_id
-  asg_max_instance_count      = var.asg_max_instance_count
-  asg_min_instance_count      = var.asg_min_instance_count
-  enable_container_insights   = var.enable_container_insights
-  asg_desired_instance_count  = var.asg_desired_instance_count
-  scaledown_schedule          = var.asg_scaledown_schedule
-  scaleup_schedule            = var.asg_scaleup_schedule
-  enable_asg_autoscaling      = var.enable_asg_autoscaling
-  notify_topic_slack_endpoint = local.notify_topic_slack_endpoint
+  stack_name                   = local.stack_name
+  name_prefix                  = local.name_prefix
+  environment                  = var.environment
+  vpc_id                       = data.aws_vpc.vpc.id
+  subnet_ids                   = local.application_subnet_ids
+  ec2_key_pair_name            = var.ec2_key_pair_name
+  ec2_instance_type            = var.ec2_instance_type
+  ec2_image_id                 = var.ec2_image_id
+  asg_max_instance_count       = var.asg_max_instance_count
+  asg_min_instance_count       = var.asg_min_instance_count
+  enable_container_insights    = var.enable_container_insights
+  asg_desired_instance_count   = var.asg_desired_instance_count
+  scaledown_schedule           = var.asg_scaledown_schedule
+  scaleup_schedule             = var.asg_scaleup_schedule
+  notify_topic_slack_endpoints = local.notify_topic_slack_endpoint
+
+  default_tags = merge(
+    module.owner_tags.tags,
+    module.iac_tags.tags
+  )
 }
 
 module "test-utility-alb" {
-  source = "git@github.com:companieshouse/terraform-modules//aws/application_load_balancer?ref=1.0.345"
+  source = "git@github.com:companieshouse/terraform-modules//aws/application_load_balancer?ref=1.0.449"
 
   environment             = var.environment
   service                 = "test-utility"
@@ -65,4 +68,17 @@ module "test-utility-alb" {
       port                = 443
     }
   }
+}
+
+module "owner_tags" {
+  source = "git@github.com:companieshouse/terraform-modules//aws/tagging/owner?ref=tags/1.0.449"
+
+  platform_owner = "Platform"
+}
+
+module "iac_tags" {
+  source = "git@github.com:companieshouse/terraform-modules//aws/tagging/iac?ref=tags/1.0.449"
+
+  source_code_url = "https://github.com/companieshouse/test-utility-services-stack"
+  group           = "infrastructure"
 }
